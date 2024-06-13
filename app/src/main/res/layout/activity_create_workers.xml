@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".CreateWorkersActivity">
+
+    <EditText
+        android:id="@+id/usernameEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nombre de usuario"
+        android:padding="16dp"
+        android:layout_marginTop="16dp" />
+
+    <EditText
+        android:id="@+id/nameEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nombre"
+        android:padding="16dp"
+        android:layout_marginTop="16dp" />
+
+    <EditText
+        android:id="@+id/passwordEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Contraseña"
+        android:inputType="textPassword"
+        android:padding="16dp"
+        android:layout_marginTop="16dp" />
+
+    <EditText
+        android:id="@+id/horaEntradaEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Hora de entrada"
+        android:inputType="time"
+        android:padding="16dp"
+        android:layout_marginTop="16dp" />
+
+    <EditText
+        android:id="@+id/horaSalidaEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Hora de salida"
+        android:inputType="time"
+        android:padding="16dp"
+        android:layout_marginTop="16dp" />
+
+    <Button
+        android:id="@+id/createWorkerButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Crear Trabajador"
+        android:layout_marginTop="16dp" />
+
+</LinearLayout>

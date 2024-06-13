@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/titleEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Título de la tarea"
+        android:padding="16dp" />
+
+    <EditText
+        android:id="@+id/descriptionEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/titleEditText"
+        android:hint="Descripción de la tarea"
+        android:padding="16dp" />
+
+    <Button
+        android:id="@+id/createTimeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/descriptionEditText"
+        android:layout_centerHorizontal="true"
+        android:text="Crear tarea" />
+
+    <TextView
+        android:id="@+id/unselectedTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/createTimeButton"
+        android:layout_marginTop="16dp"
+        android:text="Trabajadores no seleccionados"
+        android:textSize="16sp" />
+
+    <ListView
+        android:id="@+id/unselectedListView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/unselectedTextView"
+        android:choiceMode="multipleChoice" />
+
+    <TextView
+        android:id="@+id/selectedTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/unselectedListView"
+        android:layout_marginTop="16dp"
+        android:text="Trabajadores seleccionados"
+        android:textSize="16sp" />
+
+    <ListView
+        android:id="@+id/selectedListView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/selectedTextView"
+        android:choiceMode="multipleChoice" />
+
+</RelativeLayout>
