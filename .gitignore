@@ -13,3 +13,5 @@
 .externalNativeBuild
 .cxx
 local.properties
+Gradle\ Scripts/libs.versions.toml
+.libs.versions.toml
