@@ -22,4 +22,9 @@ object UserManager {
     fun findUserByUsername(username: String): User? {
         return users.find { it.username == username }
     }
+
+    fun findUserIDByUsername(username: String): Int {
+        return users.find { it.username == username }?.id
+            ?: throw NoSuchElementException("User not found")
+    }
 }

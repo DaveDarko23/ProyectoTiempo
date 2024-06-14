@@ -30,6 +30,10 @@ object TaskManager {
         return tasks
     }
 
+    fun getTaskById(id: Int): Task? {
+        return tasks.find { it.id == id }
+    }
+
     fun updateTaskTime(taskId: Int, time: Long) {
         val task = tasks.find { it.id == taskId }
         task?.let {

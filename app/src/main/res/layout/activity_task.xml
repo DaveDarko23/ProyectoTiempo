@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/taskTitleTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="8dp"/>
+
+    <TextView
+        android:id="@+id/taskDescriptionTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:layout_marginBottom="16dp"/>
+    <TextView
+        android:id="@+id/personalTimeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tiempo dedicado: 00:00:00"
+        android:layout_below="@id/elapsedTimeTextView"
+        android:layout_marginTop="16dp"
+        />
+
+    <ListView
+        android:id="@+id/commentListView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:divider="@null"
+        android:dividerHeight="0dp"/>
+
+    <EditText
+        android:id="@+id/commentEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Añadir comentario..."
+        android:layout_marginTop="8dp"
+        android:inputType="textMultiLine"/>
+
+    <Button
+        android:id="@+id/addCommentButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Añadir comentario"
+        android:layout_marginTop="8dp"/>
+
+    <Button
+        android:id="@+id/timerButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Start Timer"
+        android:layout_marginTop="16dp"/>
+
+    <TextView
+        android:id="@+id/elapsedTimeTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:layout_marginTop="8dp"/>
+
+</LinearLayout>

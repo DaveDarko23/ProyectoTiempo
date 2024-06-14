@@ -1,6 +1,7 @@
 package com.example.proyecto
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
@@ -13,6 +14,8 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.proyecto.objetos.Task
 import com.example.proyecto.objetos.TaskManager
 import com.example.proyecto.objetos.UserManager
+import com.example.proyecto.objetos.Worker
+import com.example.proyecto.objetos.Working
 
 class CreateTaskActivity : AppCompatActivity() {
     private lateinit var titleEditText: EditText
@@ -35,8 +38,10 @@ class CreateTaskActivity : AppCompatActivity() {
         selectedListView = findViewById(R.id.selectedListView)
 
         // Crear adaptadores para las listas
-        val unselectedAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_multiple_choice, unselectedWorkers)
-        val selectedAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_multiple_choice, selectedWorkers)
+        val unselectedAdapter =
+            ArrayAdapter(this, android.R.layout.simple_list_item_multiple_choice, unselectedWorkers)
+        val selectedAdapter =
+            ArrayAdapter(this, android.R.layout.simple_list_item_multiple_choice, selectedWorkers)
 
         // Asignar adaptadores a las listas
         unselectedListView.adapter = unselectedAdapter
@@ -73,9 +78,33 @@ class CreateTaskActivity : AppCompatActivity() {
                     description = description
                 )
 
+                selectedWorkers.forEach { worker ->
+                    val user = UserManager.findUserByUsername(worker)
+                    if (user is Worker) {
+                        // Crear un nuevo objeto Working y agregarlo a la workingList del Worker
+                        val newWorking = Working(idTask = TaskManager.getTaskSize())
+                        user.workingList.add(newWorking)
+                    }
+                }
                 TaskManager.addTask(newTask)
+
+                // Mostrar mensaje o realizar otra acción después de asignar las tareas
+                Toast.makeText(this, "Tareas asignadas exitosamente a los trabajadores seleccionados", Toast.LENGTH_SHORT).show()
+
+                // Limpiar los campos de título y descripción después de crear la tarea
+                titleEditText.setText("")
+                descriptionEditText.setText("")
+
+                // Limpiar la lista de trabajadores seleccionados
+                selectedWorkers.clear()
+                selectedAdapter.notifyDataSetChanged()
+
+                unselectedWorkers.clear()
+                unselectedWorkers.addAll(UserManager.getUsers().map { it.username })
+                unselectedAdapter.notifyDataSetChanged()
             } else {
-                Toast.makeText(this, "Por favor, completa todos los campos.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Por favor, completa todos los campos.", Toast.LENGTH_SHORT)
+                    .show()
             }
         }
 
