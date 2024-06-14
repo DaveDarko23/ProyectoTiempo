@@ -1,44 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="15dp">
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_centerHorizontal="true"
+        android:gravity="center|center_vertical"
+        android:padding="15dp"
+        android:text="Create Task"
+        android:textSize="24sp" />
 
     <EditText
         android:id="@+id/titleEditText"
-        android:layout_width="match_parent"
+        android:layout_width="320dp"
         android:layout_height="wrap_content"
-        android:hint="Título de la tarea"
-        android:padding="16dp" />
+        android:layout_below="@+id/textView3"
+        android:layout_marginTop="30dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/custom_input"
+        android:hint="Name"
+        android:padding="20dp" />
 
     <EditText
         android:id="@+id/descriptionEditText"
-        android:layout_width="match_parent"
+        android:layout_width="320dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/titleEditText"
-        android:hint="Descripción de la tarea"
-        android:padding="16dp" />
-
-    <Button
-        android:id="@+id/createTimeButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/descriptionEditText"
+        android:layout_marginTop="30dp"
         android:layout_centerHorizontal="true"
-        android:text="Crear tarea" />
+        android:background="@drawable/custom_input"
+        android:hint="Description"
+        android:padding="30dp" />
 
     <TextView
         android:id="@+id/unselectedTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/createTimeButton"
-        android:layout_marginTop="16dp"
+        android:layout_below="@id/descriptionEditText"
+        android:layout_marginLeft="36dp"
+        android:layout_marginTop="30dp"
         android:text="Trabajadores no seleccionados"
         android:textSize="16sp" />
 
     <ListView
         android:id="@+id/unselectedListView"
-        android:layout_width="match_parent"
+        android:layout_width="320dp"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
         android:layout_below="@id/unselectedTextView"
         android:choiceMode="multipleChoice" />
 
@@ -47,15 +61,32 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/unselectedListView"
-        android:layout_marginTop="16dp"
+        android:layout_marginLeft="36dp"
+        android:layout_marginTop="30dp"
         android:text="Trabajadores seleccionados"
         android:textSize="16sp" />
 
     <ListView
         android:id="@+id/selectedListView"
-        android:layout_width="match_parent"
+        android:layout_width="320dp"
+        android:layout_marginTop="30dp"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
         android:layout_below="@id/selectedTextView"
-        android:choiceMode="multipleChoice" />
+        android:choiceMode="multipleChoice" >
+
+    </ListView>
+
+    <Button
+        android:id="@+id/createTimeButton"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/blue_button"
+        android:padding="12dp"
+        android:layout_below="@id/selectedListView"
+        android:text="Create"
+        android:layout_centerHorizontal="true"
+        android:textColor="#FFFFFF" />
 
 </RelativeLayout>
