@@ -2,24 +2,25 @@ package com.example.proyecto
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.ArrayAdapter
-import android.widget.ListView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.proyecto.adapters.TaskAdapter
 import com.example.proyecto.objetos.CurrentTaskManager
 import com.example.proyecto.objetos.CurrentUserManager
 import com.example.proyecto.objetos.TaskManager
 import com.example.proyecto.objetos.Worker
 
 class WorkerTaskListActivity : AppCompatActivity() {
-    private lateinit var taskListView: ListView
+    private lateinit var taskRecyclerView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_worker_task_list)
 
-        // Configurar ListView
-        taskListView = findViewById(R.id.taskListView)
+        // Configurar RecyclerView
+        taskRecyclerView = findViewById(R.id.taskRecyclerView)
 
         // Obtener al usuario actual (asumiendo que está logueado)
         val currentUser = CurrentUserManager.getCurrentUser()
@@ -35,20 +36,14 @@ class WorkerTaskListActivity : AppCompatActivity() {
             // Obtener las tareas correspondientes de TaskManager
             val tasks = taskIds.mapNotNull { id -> TaskManager.getTaskById(id) }
 
-            // Obtener los nombres de las tareas
-            val taskNames = tasks.map { it.title }
-
-            // Crear un adaptador para el ListView
-            val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, taskNames)
-            taskListView.adapter = adapter
-
-            // Manejar clic en los elementos del ListView
-            taskListView.setOnItemClickListener { _, _, position, _ ->
-                val selectedTask = tasks[position]
+            // Configurar el adaptador
+            val adapter = TaskAdapter(tasks) { selectedTask ->
                 CurrentTaskManager.setCurrentTask(selectedTask)
                 val intent = Intent(this, TaskActivity::class.java)
                 startActivity(intent)
             }
+            taskRecyclerView.layoutManager = LinearLayoutManager(this)
+            taskRecyclerView.adapter = adapter
 
         } else {
             // Mostrar un mensaje de error si el usuario no es un Worker

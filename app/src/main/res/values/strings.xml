@@ -4,4 +4,8 @@
     <string name="log_in">Log in</string>
 
     <string name="create_worker_title">Create new Worker</string>
+    <string name="title_activity_task_list_navigation">TaskListNavigationActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 </resources>

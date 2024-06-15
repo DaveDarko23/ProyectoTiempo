@@ -13,6 +13,7 @@ import com.example.proyecto.objetos.Comment
 import com.example.proyecto.objetos.CurrentTaskManager
 import com.example.proyecto.objetos.CurrentUserManager
 import com.example.proyecto.objetos.Task
+import com.example.proyecto.objetos.TaskManager
 import com.example.proyecto.objetos.Worker
 import com.example.proyecto.objetos.Working
 import java.text.SimpleDateFormat
@@ -109,8 +110,6 @@ class TaskActivity : AppCompatActivity() {
                 elapsedTimeSeconds++
                 val timeFormat = formatElapsedTime(elapsedTimeSeconds)
                 elapsedTimeTextView.text = timeFormat
-                updatePersonalTime()
-                updatePersonalTimeTextView()
                 handler.postDelayed(this, 1000)
             }
         }
@@ -123,6 +122,7 @@ class TaskActivity : AppCompatActivity() {
         handler.removeCallbacks(runnable)
         updatePersonalTime()
         updatePersonalTimeTextView()
+        TaskManager.updateTaskTime(task!!.id, elapsedTimeSeconds)
         elapsedTimeSeconds = 0 // Resetear el temporizador después de actualizar el tiempo personal
     }
 

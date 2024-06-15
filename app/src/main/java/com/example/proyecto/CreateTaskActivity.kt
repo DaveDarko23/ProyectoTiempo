@@ -1,16 +1,14 @@
 package com.example.proyecto
 
 import android.os.Bundle
-import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ListView
+import android.widget.Spinner
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.example.proyecto.objetos.Task
 import com.example.proyecto.objetos.TaskManager
 import com.example.proyecto.objetos.UserManager
@@ -20,6 +18,7 @@ import com.example.proyecto.objetos.Working
 class CreateTaskActivity : AppCompatActivity() {
     private lateinit var titleEditText: EditText
     private lateinit var descriptionEditText: EditText
+    private lateinit var prioritySpinner: Spinner
     private lateinit var createTimeButton: Button
     private lateinit var unselectedListView: ListView
     private lateinit var selectedListView: ListView
@@ -33,9 +32,16 @@ class CreateTaskActivity : AppCompatActivity() {
         setContentView(R.layout.activity_create_task)
         titleEditText = findViewById(R.id.titleEditText)
         descriptionEditText = findViewById(R.id.descriptionEditText)
+        prioritySpinner = findViewById(R.id.prioritySpinner)
         createTimeButton = findViewById(R.id.createTimeButton)
         unselectedListView = findViewById(R.id.unselectedListView)
         selectedListView = findViewById(R.id.selectedListView)
+
+        // Configurar el spinner de prioridad
+        val priorityOptions = arrayOf("Low", "Medium", "High")
+        val priorityAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, priorityOptions)
+        priorityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        prioritySpinner.adapter = priorityAdapter
 
         // Crear adaptadores para las listas
         val unselectedAdapter =
@@ -68,6 +74,7 @@ class CreateTaskActivity : AppCompatActivity() {
         createTimeButton.setOnClickListener {
             val title = titleEditText.text.toString()
             val description = descriptionEditText.text.toString()
+            val priority = prioritySpinner.selectedItem.toString()
 
             // Verificar que los campos no estén vacíos
             if (title.isNotEmpty() && description.isNotEmpty()) {
@@ -75,7 +82,8 @@ class CreateTaskActivity : AppCompatActivity() {
                 val newTask = Task(
                     id = TaskManager.getTaskSize(), // Generar un ID único para la tarea
                     title = title,
-                    description = description
+                    description = description,
+                    priority = priority
                 )
 
                 selectedWorkers.forEach { worker ->
@@ -91,9 +99,10 @@ class CreateTaskActivity : AppCompatActivity() {
                 // Mostrar mensaje o realizar otra acción después de asignar las tareas
                 Toast.makeText(this, "Tareas asignadas exitosamente a los trabajadores seleccionados", Toast.LENGTH_SHORT).show()
 
-                // Limpiar los campos de título y descripción después de crear la tarea
+                // Limpiar los campos de título, descripción y prioridad después de crear la tarea
                 titleEditText.setText("")
                 descriptionEditText.setText("")
+                prioritySpinner.setSelection(0) // Seleccionar la primera opción (Low)
 
                 // Limpiar la lista de trabajadores seleccionados
                 selectedWorkers.clear()

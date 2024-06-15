@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
                 0,
                 "Admin",
                 "Admin",
-                "admin123",
+                "123",
                 "Admin",
                 "IT",
                 "Manage IT infrastructure",
@@ -43,8 +43,7 @@ class MainActivity : AppCompatActivity() {
         val passwordEditText = findViewById<EditText>(R.id.passwordEditText)
         val loginButton = findViewById<Button>(R.id.loginButton)
 
-        // Crear usuario predeterminado
-        val defaultUser = Worker(
+        val worker1 = Worker(
             id = 0,
             username = "DaveDarko",
             name = "Dave Darko",
@@ -54,23 +53,42 @@ class MainActivity : AppCompatActivity() {
             horaSalida = "17:00"
         )
 
-        // Crear 5 tareas predeterminadas
-        for (i in 0..4) {
-            val task = Task(
-                id = i,
-                title = "Tarea $i",
-                description = "Descripción de la Tarea $i"
-            )
-            TaskManager.addTask(task)
-        }
+        val worker2 = Worker(
+            id = 1,
+            username = "Oscaro",
+            name = "Oscar O",
+            password = "123",
+            userType = "Worker",
+            horaEntrada = "09:00",
+            horaSalida = "17:00"
+        )
 
-        // Asignar tareas 1, 3 y 5 al WorkingList del usuario predeterminado
-        defaultUser.workingList.add(Working(idTask = 0))
-        defaultUser.workingList.add(Working(idTask = 2))
-        defaultUser.workingList.add(Working(idTask = 4))
+        // Crear tareas con distintas prioridades
+        val tasks = listOf(
+            Task(id = 0, title = "Tarea 0", description = "Descripción de la Tarea 0", priority = "Medium"),
+            Task(id = 1, title = "Tarea 1", description = "Descripción de la Tarea 1", priority = "Low"),
+            Task(id = 2, title = "Tarea 2", description = "Descripción de la Tarea 2", priority = "High"),
+            Task(id = 3, title = "Tarea 3", description = "Descripción de la Tarea 3", priority = "Medium"),
+            Task(id = 4, title = "Tarea 4", description = "Descripción de la Tarea 4", priority = "Low"),
+            Task(id = 5, title = "Tarea 5", description = "Descripción de la Tarea 5", priority = "High")
+        )
 
-        // Agregar el usuario predeterminado al UserManager
-        UserManager.addUser(defaultUser)
+        // Agregar tareas al TaskManager
+        tasks.forEach { task -> TaskManager.addTask(task) }
+
+        // Asignar tareas a los trabajadores
+        worker1.workingList.add(Working(idTask = 0))
+        worker1.workingList.add(Working(idTask = 1))
+        worker1.workingList.add(Working(idTask = 4))
+        worker1.workingList.add(Working(idTask = 5))
+
+        worker2.workingList.add(Working(idTask = 2))
+        worker2.workingList.add(Working(idTask = 3))
+        worker2.workingList.add(Working(idTask = 5))
+
+        // Agregar trabajadores al UserManager
+        UserManager.addUser(worker1)
+        UserManager.addUser(worker2)
 
         loginButton.setOnClickListener {
             val username = usernameEditText.text.toString()
@@ -80,10 +98,11 @@ class MainActivity : AppCompatActivity() {
             if (user != null && user.password == password) {
                 CurrentUserManager.setCurrentUser(user)
                 if (user.userType.equals("Admin")) {
-                    val intent = Intent(this, AdminMenuActivity::class.java)
+                    //val intent = Intent(this, AdminMenuActivity::class.java)
+                    val intent = Intent(this, TaskListNavigationActivity::class.java)
                     startActivity(intent)
                 }else{
-                    val intent = Intent(this, WorkerMenuActivity::class.java)
+                    val intent = Intent(this, TaskListNavigationActivity::class.java)
                     startActivity(intent)
                 }
             } else {

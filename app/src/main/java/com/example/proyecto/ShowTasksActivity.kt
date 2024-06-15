@@ -45,7 +45,7 @@ class ShowTasksActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
         CurrentTaskManager.setCurrentTask(selectedTask)
 
         // Crear un intent para abrir TaskActivity
-        val intent = Intent(this, TaskActivity::class.java)
+        val intent = Intent(this, ViewTaskActivity::class.java)
         startActivity(intent)
     }
 }
